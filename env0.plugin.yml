@@ -5,6 +5,8 @@ inputs:
     description: Additional OPA exec flags
   decision:
     description: Policy decision to evaluate
+  bundle_path:
+    description: Path to policy bundle
   path:
     description: Path to OPA input file(s)
     required: true
@@ -13,4 +15,10 @@ run:
   exec: |
     curl -L -o opa https://openpolicyagent.org/downloads/v0.46.1/opa_linux_amd64_static
     chmod 755 ./opa
-    ./opa exec --decision ${inputs.decision} ${inputs.flags} ${inputs.path}
+    export OPA_RESULT=$(./opa exec --decision ${inputs.decision} -b ${inputs.bundle_path} ${inputs.flags} ${inputs.path} | jq jq '.result[0].result'
+    if [OPA_RESULT = "true"]; then
+        return 0
+    else
+        return -1
+    fi
+    
