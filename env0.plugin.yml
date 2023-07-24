@@ -16,7 +16,7 @@ run:
     curl -L -o opa https://openpolicyagent.org/downloads/v0.46.1/opa_linux_amd64_static
     chmod 755 ./opa
     export OPA_RESULT=$(./opa exec --decision ${inputs.decision} -b ${inputs.bundle_path} ${inputs.flags} ${inputs.path} | jq '.result[0].result')
-    if ["$OPA_RESULT" = "true"]; then
+    if [ "$OPA_RESULT" = "true" ]; then
         exit 0
     else
         exit 1
