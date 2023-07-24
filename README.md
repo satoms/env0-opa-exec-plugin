@@ -5,7 +5,7 @@ This env0 OPA plugin allows you to run `opa exec` on a bundle directory as part 
 
 The OPA plugin accepts the following inputs:
 
-* decision - The specific decision to evaluate with `opa exec`. If not specified opa will evaluate the default decision.
+* decision - The specific true/false decision to evaluate with `opa exec`. If not specified opa will evaluate the default decision.
 * flags - A string containing additional flags as one string
 * bundle_path (required) - the path to your bundle directory (the root folder is your project's root folder)
 * path (required) - the path to the input file to be evaluated by `opa exec`
